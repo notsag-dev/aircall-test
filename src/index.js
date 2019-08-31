@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const http = require('http');
 const config = require('./config');
-const controllers = require('./controllers');
+const adapters = require('./adapters');
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Set API endpoints
-controllers.set(app);
+adapters.set(app);
 
 // Listen
 const httpServer = http.createServer(app);
