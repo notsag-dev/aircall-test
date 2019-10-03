@@ -16,7 +16,7 @@ const service = {
   triggerAlert(errorMessage) {
     const a = Object.create(alert);
     this.alerts.push(a);
-    a.init(errorMessage, this.escalationPolicy, this);
+    a.init(errorMessage, this.escalationPolicy);
     a.trigger();
   },
 };
