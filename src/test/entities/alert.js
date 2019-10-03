@@ -2,16 +2,19 @@ const assert = require('assert');
 const {alert, alertStatus} = require('../../entities/alert');
 const config = require('../../config');
 const {escalationPolicy} = require('../../entities/escalationPolicy');
+const {target} = require('../../entities/target');
+const {level} = require('../../entities/level');
 
 describe('Alert tests', () => {
-  const target1 = {
-    name: 'Anna Smith',
-    email: 'anna@testaircall.com'
-  };
-  const target2 = {
-    name: 'John Power',
-    phone: '09091234'
-  };
+  const target1 = Object.create(target);
+  const target2 = Object.create(target);
+  target1.init('John Smith', {phone: '09091234'});
+  target2.init('Juan Perez', {email: 'juan@aircall.com'});
+
+  const level1 = Object.create(level);
+  const level2 = Object.create(level);
+  level1.init([target1]);
+  level2.init([target2]);
 
   it('Stops escalation immediately for a triggered alert without escalation policy', () => {
     const a = Object.create(alert);
@@ -21,8 +24,6 @@ describe('Alert tests', () => {
   });
 
   it('Sets as triggered an alert that has been just triggered', () => {
-    const level1 = [target1];
-    const level2 = [target2];
     const ep = Object.create(escalationPolicy);
     ep.init([level1, level2]);
     const a = Object.create(alert);
@@ -38,7 +39,6 @@ describe('Alert tests', () => {
   });
 
   it('Stops escalation after having escalated all levels and not having been handled', (done) => {
-    const level1 = [target1];
     const ep = Object.create(escalationPolicy);
     ep.init([level1]);
     const a = Object.create(alert);
