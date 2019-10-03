@@ -1,11 +1,10 @@
 {
-  "name": "node-api",
+  "name": "test-aircall",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/index.js",
+    "test": "mocha \"./src/test/**/*.js\"",
     "eslint": "./node_modules/.bin/eslint --fix ."
   },
   "husky": {
@@ -22,10 +21,7 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "express": "^4.17.1"
+    "eslint-config-airbnb-base": "^14.0.0"
   },
   "devDependencies": {
     "eslint": "^6.1.0",
